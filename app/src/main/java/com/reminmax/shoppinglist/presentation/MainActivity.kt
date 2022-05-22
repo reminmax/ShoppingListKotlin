@@ -2,11 +2,23 @@ package com.reminmax.shoppinglist.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import com.reminmax.shoppinglist.R
+import com.reminmax.shoppinglist.presentation.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Subscription to shopList changes
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.shopList.observe(this) {
+            Log.d("MainActivityTest", it.toString())
+        }
     }
 }
