@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ShoppingList/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/ShoppingList/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/ShoppingList/app/src/main/res/layout/item_shop_disabled.xml" value="0.365625" />
+        <entry key="..\:/ShoppingList/app/src/main/res/layout/item_shop_enabled.xml" value="0.27421875" />
       </map>
     </option>
   </component>

@@ -4,18 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.reminmax.shoppinglist.domain.ShopItem
 import com.reminmax.shoppinglist.domain.repository.ShopListRepository
+import kotlin.random.Random
 
-object ShopListRepositoryImpl:ShopListRepository {
+object ShopListRepositoryImpl: ShopListRepository {
 
     private val shopListLiveData = MutableLiveData<List<ShopItem>>()
-    private val shopList = mutableListOf<ShopItem>()
+    private val shopList = sortedSetOf<ShopItem>({ item1, item2 -> item1.id.compareTo(item2.id)})
 
     private var autoIncrementId = 0
 
     init {
         // Add demo data
-        for (i in 0 until 10) {
-            val item = ShopItem("Name $i", i, true)
+        for (i in 0 until 100) {
+            val item = ShopItem("Name $i", i, Random.nextBoolean())
             addShopItem(item)
         }
     }
