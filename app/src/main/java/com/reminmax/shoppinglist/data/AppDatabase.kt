@@ -7,38 +7,33 @@ import androidx.room.RoomDatabase
 import com.reminmax.shoppinglist.data.dao.ShopListDao
 
 @Database(entities = [ShopItemDbModel::class], version = 1, exportSchema = false)
-abstract class AppdDatabase: RoomDatabase() {
+abstract class AppDatabase: RoomDatabase() {
 
     abstract fun shopListDao(): ShopListDao
 
     companion object {
 
-        private var INSTANCE: AppdDatabase? = null
+        private var INSTANCE: AppDatabase? = null
         private val LOCK = Any()
-        private const val DB_NAME = "shop_items.db"
+        private const val DB_NAME = "shop_item.db"
 
-        fun getInstance(application: Application): AppdDatabase {
-
+        fun getInstance(application: Application): AppDatabase {
             INSTANCE?.let {
                 return it
             }
-
             synchronized(LOCK) {
                 INSTANCE?.let {
                     return it
                 }
+                val db = Room.databaseBuilder(
+                    application,
+                    AppDatabase::class.java,
+                    DB_NAME
+                )
+                    .build()
+                INSTANCE = db
+                return db
             }
-            var db = Room.databaseBuilder(
-                application,
-                AppdDatabase::class.java,
-                DB_NAME
-            ).build()
-
-            INSTANCE = db
-
-            return db
         }
-
     }
-
 }

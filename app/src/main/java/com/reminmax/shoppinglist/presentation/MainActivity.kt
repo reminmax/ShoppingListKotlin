@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         shopItemContainer = findViewById(R.id.shop_item_container)
 
-        setupRecyclerView();
+        setupRecyclerView()
 
         // Subscription to shopList changes
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchFragment(fragment: Fragment) {
 
-        // в MainActivity перед добавлением фрагмента в контейнер следует удалять из стека предыдущий
         supportFragmentManager.popBackStack()
 
         supportFragmentManager.beginTransaction()
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSwipeToDeleteListener(rvShopList: RecyclerView) {
         // Swipe to delete listener
-        var callBack = object : ItemTouchHelper.SimpleCallback(
+        val callBack = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
@@ -90,8 +89,7 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // в данном случае этот метод не нужен
-                return false;
+                return false
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -118,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupLongClickListener() {
         shopListadapter.shopItemLongClickListener = {
-            viewModel.changeEnabledState(it)
+            viewModel.changeEnableState(it)
         }
     }
 }
