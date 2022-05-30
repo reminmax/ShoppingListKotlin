@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -26,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        dataBinding true
+    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -44,7 +48,10 @@ dependencies {
     // Room
     def roomVersion = "2.4.2"
     implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    //annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt "androidx.room:room-compiler:$roomVersion"
+
     // Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$roomVersion")
 
